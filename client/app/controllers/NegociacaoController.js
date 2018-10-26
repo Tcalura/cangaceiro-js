@@ -23,7 +23,7 @@ class NegociacaoController {
 
     // ALTERADO PARA SER CHAMANDO O MÉTODO ESTÁTICO
     let diaMesAno = DateConverter.paraTexto(negociacao.data);
-    console.log(typeof(diaMesAno));
+    console.log((diaMesAno));
 
 
   }
