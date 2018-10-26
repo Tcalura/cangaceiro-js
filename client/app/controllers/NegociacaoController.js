@@ -13,24 +13,19 @@ class NegociacaoController {
   adiciona(event) {
     // cancelando a submissão do formulário
     event.preventDefault();
-    // spread operator ... faz com que cada posição do array se torne um parametro do construtor
-    let data = new Date(
-      ...this._inputData.value
-      .split('-')
-      .map((item, indice) => item - indice % 2)
-    );
-    console.log(data);
+
+    let converter = new DateConverter();
+    let data = converter.paraData(this._inputData.value);
 
     let negociacao = new Negociacao(
       data,
       parseInt(this._inputQuantidade.value),
       parseFloat(this._inputValor.value)
     );
-    console.log(negociacao.data);
 
-    let diaMesAno = negociacao.data.getDate()
-+ '/' + (negociacao.data.getMonth() + 1)
-+ '/' + negociacao.data.getFullYear();
-console.log(diaMesAno);
+    let diamesano = converter.paraTexto(negociacao.data);
+    console.log(diamesano);
+
+
   }
 }
