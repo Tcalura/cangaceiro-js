@@ -14,17 +14,16 @@ class NegociacaoController {
     // cancelando a submissão do formulário
     event.preventDefault();
 
-    let converter = new DateConverter();
-    let data = converter.paraData(this._inputData.value);
-
+    // ALTERADO PARA SER CHAMANDO O MÉTODO ESTÁTICO
     let negociacao = new Negociacao(
-      data,
+      DateConverter.paraData(this._inputData.value),
       parseInt(this._inputQuantidade.value),
       parseFloat(this._inputValor.value)
     );
 
-    let diamesano = converter.paraTexto(negociacao.data);
-    console.log(diamesano);
+    // ALTERADO PARA SER CHAMANDO O MÉTODO ESTÁTICO
+    let diaMesAno = DateConverter.paraTexto(negociacao.data);
+    console.log(typeof(diaMesAno));
 
 
   }
