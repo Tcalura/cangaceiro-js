@@ -26,6 +26,11 @@ class NegociacaoController {
       parseInt(this._inputQuantidade.value),
       parseFloat(this._inputValor.value)
     );
-    console.log(negociacao);
+    console.log(negociacao.data);
+
+    let diaMesAno = negociacao.data.getDate()
++ '/' + (negociacao.data.getMonth() + 1)
++ '/' + negociacao.data.getFullYear();
+console.log(diaMesAno);
   }
 }
