@@ -14,10 +14,9 @@ class NegociacaoController {
   adiciona(event) {
     event.preventDefault();
     this._negociacoes.adiciona(this._criaNegociacao());
-    // imprime a lista com o novo elemento
-    console.log(this._negociacoes.paraArray());
     this._limpaFormulario();
   }
+
   _criaNegociacao() {
     // retorna uma instância de negociação
     return new Negociacao(

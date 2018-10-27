@@ -7,8 +7,10 @@ class Negociacoes {
   adiciona(negociacao) {
     this._negociacoes.push(negociacao);
   }
-  
+
   paraArray() {
-    return this._negociacoes;
+    // retorna uma copia da lista de objs e nao a lista original 
+    // esse metodo é para apenas consulta nao manipulação 
+    return [].concat(this._negociacoes);
   }
 }
