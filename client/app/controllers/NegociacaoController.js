@@ -3,7 +3,7 @@ class NegociacaoController {
   constructor(){
     // a ideia é que $ seja o querySelector
     // realizando o bind, $ mantém document como seu contexto this
-    let $ = document.querySelector.bind(document);
+    const $ = document.querySelector.bind(document);
     // buscando os elementos
     this._inputData = $('#data');
     this._inputQuantidade = $('#quantidade');
@@ -12,12 +12,18 @@ class NegociacaoController {
     this._negociacoesView = new NegociacoesView('#negociacoes');
     // atualizando a view
     this._negociacoesView.update(this._negociacoes);
+    this._mensagem = new Mensagem();
+    this._mensagemView = new MensagemView('#mensagemView');
+    this._mensagemView.update(this._mensagem);
   }
 
   adiciona(event) {
     event.preventDefault();
     this._negociacoes.adiciona(this._criaNegociacao());
+    this._mensagem.texto = 'Negociação adicionada com sucesso';
+
     this._negociacoesView.update(this._negociacoes);
+    this._mensagemView.update(this._mensagem);
     this._limpaFormulario();
   }
 
