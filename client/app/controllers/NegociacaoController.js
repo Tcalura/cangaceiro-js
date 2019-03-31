@@ -64,25 +64,17 @@ class NegociacaoController {
     this._negociacoes.esvazia();
     this._mensagem.texto = 'Negociações apagadas com sucesso';
   }
-  // 13.5 RESOLVENDO PROMISES SEQUENCIALMENTE
-  impotaNegociacoes(){
-    const negociacoes = [];
-
-    this._service.obtemNegociacoesDaSemana()
-      .then(semana => {
-        negociacoes.push(...semana);
-        return this._service.obtemNegociacoesDaSemanaAnterior();
-      })
-      .then(anterior => {
-        negociacoes.push(...anterior);
-        return this._service.obtemNegociacoesDaSemanaRetrasada();
-      })
-      .then(retrasada => {
-        negociacoes.push(...retrasada);
-        negociacoes.forEach(negociacao => this._negociacoes.adiciona(negociacao));
-        this._mensagem.texto = 'Negociações importadas com sucesso';
-      })
-      .catch(err => this._mensagem.texto = err); 
+  // 13.6 RESOLVENDO PROMISES PARALELAMENTE
+  impotaNegociacoes(){ 
+    this._service
+      .obtemNegociacoesDoPeriodo()
+      .then(negociacoes => {
+        negociacoes.filter(novaNegociacao => 
+            !this._negociacoes.paraArray().some(negociacaoExistente => 
+              novaNegociacao.equals(negociacaoExistente)))
+          .forEach(negociacao => this._negociacoes.adiciona(negociacao));
+        this._mensagem.texto = 'Negociações do periodo importadas com sucesso';
+      }).catch(err => this._mensagem.texto = err);
   }
-  
+
 }
